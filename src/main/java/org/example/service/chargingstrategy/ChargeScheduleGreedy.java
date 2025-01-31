@@ -26,12 +26,10 @@ public class ChargeScheduleGreedy implements ChargeSchedule {
                 Truck truckToSchedule = truckQueue.peek();
                 Charger fastestCharger = fastestChargers.peek();
                 if (truckToSchedule == null || !isEnoughTimeRemaining(hours, truckToSchedule, fastestCharger, i)) break;
-                if (isEnoughTimeRemaining(hours, truckToSchedule, fastestCharger, i)) {
-                    truckQueue.poll();
-                    fastestChargers.poll();
-                    chargingSchedule.addTruck(fastestCharger, truckToSchedule);
-                    trackChargerAvailibility(i, truckToSchedule, fastestCharger);
-                }
+                truckQueue.poll();
+                fastestChargers.poll();
+                chargingSchedule.addTruck(fastestCharger, truckToSchedule);
+                trackChargerAvailibility(i, truckToSchedule, fastestCharger);
             }
         }
         return chargingSchedule;
